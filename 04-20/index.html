@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="1.css">
+</head>
+
+<body>
+    <div id="box1"></div>
+    <button id="box2">回到顶部</button>
+</body>
+<script>
+    function fadeIn(ele) {
+        ele.style.opacity = 0;
+        (function fade() {
+            var val = parseFloat(ele.style.opacity);
+            if (!((val += .2) > 1)) {
+                ele.style.opacity = val;
+                setInterval(fade, 1000);
+            }
+        })();
+    }
+    let box1 = document.querySelector('#box1');
+    fadeIn(box1);
+    let box2 = document.querySelector('#box2');
+
+    window.onscroll = function () {
+        let scrool = document.documentElement.scrollTop;
+        if (scrool > 200) {
+            box2.style.display = 'block'
+        }
+    }
+    box2.onclick = function () {
+        let scrool = document.documentElement.scrollTop;
+        let timer = setInterval(() => {
+            let step = scrool / (1000 / 10);
+            scrool -= step;
+            document.documentElement.scrollTop = scrool;
+            // console.log(scrool);
+            if (scrool < 1) {
+                scrool = 0;
+            }
+            document.documentElement.scrollTop = scrool;
+            if (scrool <= 0) {
+                clearInterval(timer);
+            }
+        }, 10);
+    }
+
+
+</script>
+
+</html>
