@@ -1,0 +1,97 @@
+<!-- animation 动画
+    transition 过渡
+    &代表当前的父元素
+    &:hover{
+        animation-
+    } 
+    @keyframes move123{ //固定写法：创建一个动画，后面跟着动画名
+        0%{
+            opactiy:1
+        }
+        50%{
+            opactiy:0
+        }
+        100%{
+            opactiy:1
+        }
+    }
+    animation{
+        trunRound 1s liner infinite;
+    }
+
+    @keyframes turnRound{
+        0%{
+            transform:rotate(0);
+        }
+        100%{
+            transform:rotate(360);
+        }
+    }
+
+
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="1.css">
+</head>
+
+<body>
+    <div id="box">bsbsbsb</div>
+    <button>回到顶部</button>
+    <script>
+        // let box = document.querySelector('#box');
+        // function fadeIn(ele, time = 1000) {
+        //     if (ele.isShowing) return;
+        //     ele.isShowing = 1;
+        //     let opa = 0;
+        //     let step = (1000 - 0) / (time / 10);
+        //     let timer = setInterval(() => {
+        //         opa += step;
+        //         if (opa >= 1000) {
+        //             opa = 1000;
+        //             clearInterval(timer);
+        //             ele.isShowing = 0;
+        //         }
+        //         ele.style.opacity = opa / 1000;
+        //     }, 10);
+        // }
+        // box.onclick = function () {
+        //     fadeIn(this, 500);
+        // }
+
+        let btn = document.querySelector('button');
+        let h = document.documentElement.clientHeight;
+        window.onscroll = function () {
+            let scrool = document.documentElement.scrollTop;
+            if (scrool > h / 2) {
+                btn.style.display = 'block';
+            } else {
+                btn.style.display = 'none';
+            }
+        }
+        btn.onclick = function () {
+            if (this.isGoing) return;
+            this.isGoing = 1;
+            let t = document.documentElement.scrollTop;
+            let timer = setInterval(() => {
+                t -= 10;
+                console.log(t);
+
+                if (t < 10) {
+                    t = 0;
+                    clearInterval(timer);
+                    this.isGoing = 0;
+                }
+                document.documentElement.scrollTop = t;
+            }, 10)
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="lbt.css">
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li><img src="./images/1.png" alt=""></li>
+            <li><img src="./images/2.png" alt=""></li>
+            <li><img src="./images/3.png" alt=""></li>
+            <li><img src="./images/4.png" alt=""></li>
+            <li><img src="./images/5.png" alt=""></li>
+            <li><img src="./images/6.png" alt=""></li>
+            <li><img src="./images/1.png" alt=""></li>
+        </ul>
+        <div class="btn-box">
+            <div class="left-btn">&lt;</div>
+            <div class="right-btn">></div>
+        </div>
+
+    </div>
+    <script>
+        let box = document.querySelector("#box");
+        let ul = document.querySelector('ul');
+        let start = 0;
+        let timer = null;
+        function move() {
+            timer = setInterval(() => {
+                start -= 600;
+                if (start < -3600) {
+                    start = 0;
+                    ul.style.transition = 'none';
+                    ul.style.transform = `translateX(${start}px)`;
+                    let l = ul.offsetLeft;//读写分离，到这边就重现渲染一次，读取操作会让浏览器重新渲染
+                    start -= 600;
+                    ul.style.transition = 'all 0.3s';
+                } else {
+                    ul.style.transition = 'all 0.3s';
+                }
+                ul.style.transform = `translateX(${start}px)`;
+
+            }, 1500);
+        }
+        move();
+        box.onmouseenter = function () {
+            clearInterval(timer);
+        }
+        box.onmouseleave = function () {
+            move();
+        }
+        let Lbtn = document.querySelector('.left-btn');
+        let Rbtn = document.querySelector('.right-btn');
+        Lbtn.onclick = function () {
+            start -= 600;
+            if (start < -3600) {
+                start = 0;
+                ul.style.transition = 'none';
+                ul.style.transform = `translateX(${start}px)`;
+                let l = ul.offsetLeft;//读写分离，到这边就重现渲染一次，读取操作会让浏览器重新渲染
+                start -= 600;
+                ul.style.transition = 'all 0.3s';
+            } else {
+                ul.style.transition = 'all 0.3s';
+            }
+            ul.style.transform = `translateX(${start}px)`;
+        };
+        Rbtn.onclick = function () {
+            start += 600;
+            console.log(start);
+            
+            if (start === 0) {
+                start = -3600;
+                ul.style.transition = 'none';
+                ul.style.transform = `translateX(${start}px)`;
+                let l = ul.offsetLeft;//读写分离，到这边就重现渲染一次，读取操作会让浏览器重新渲染
+                start += 600;
+                ul.style.transition = 'all 0.3s';
+            } else {
+                ul.style.transition = 'all 0.3s';
+            }
+            ul.style.transform = `translateX(${start}px)`;
+        }
+
+    </script>
+</body>
+
+</html>
