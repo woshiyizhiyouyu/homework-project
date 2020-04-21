@@ -71,9 +71,15 @@
             ul.style.transform = `translateX(${start}px)`;
         };
         Rbtn.onclick = function () {
+            if (start === 0) {
+                start = -3600;
+                ul.style.transition = 'none';
+                ul.style.transform = `translateX(${start}px)`;
+                let l = ul.offsetLeft;
+            }
             start += 600;
             console.log(start);
-            
+
             if (start === 0) {
                 start = -3600;
                 ul.style.transition = 'none';
